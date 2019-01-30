@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(..//images/cool_background2.jpg);
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    
+    
+}
+
+h2 {
+    margin: 100px 0px 0px 800px;
+    
+}
+
+
