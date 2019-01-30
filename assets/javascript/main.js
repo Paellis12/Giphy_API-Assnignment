@@ -6,6 +6,21 @@ $(document).ready(function () {
 
 
     //Next, functions that will show the intial gif buttons, add new buttons, and reset the screen.//
+    function showButtons(){
+        for(var i = 0; i < topics.length; i++) { 
+            var buttonGif = $("<button>");
+            buttonGif.addClass("action");
+            buttonGif.addClass("btn btn-primary");   ////Having a hard time getting buttons to show, no errors on console, confusing////
+            buttonGif.attr("data-name", actions[i]);
+            buttonGif.text(actions[i]);
+            $("gif-buttons").append(buttonGif);
+            
+        }
+        showButtons();
+    }
+    console.log(showButtons);
+    
+    
     function addButton(){
         $("#addGif").on("click", function(){
             var action = $("#action-input").val().trim();
@@ -16,19 +31,12 @@ $(document).ready(function () {
             showButtons();
             return false;
         });
+        
     }
+    addButton();
 
 
-    function showButtons(){
-        for(var i = 0; i < topics.length; i++) {
-            var buttonGif = $("<button>");
-            buttonGif.addClass("action");
-            buttonGif.addClass("btn btn-primary");
-            buttonGif.attr("data-name", actions[i]);
-            buttonGif.text(actions[i]);
-            $("gif-buttons").append(buttonGif);
-        }
-    }
+   
     
 
  
@@ -39,7 +47,9 @@ $(document).ready(function () {
             showButtons();
             return false;
         });
+        ;
     }
+    reset()
     //Make ajax call for animal api function//
     function showGifs (){
         var animals = $(this).attr("data-animal");
@@ -49,12 +59,10 @@ $(document).ready(function () {
             url: queryUrl,
             method: "GET"
         })
-        .done(function(response){
+        .then(function(response){
             var results = response.data;
             
-            if(results == ""){
-                alert("Sorry, no gif for this query.");
-            }
+            
 
             for(var i = 0; i < results.length; i++){
                 //////////////////
@@ -76,11 +84,11 @@ $(document).ready(function () {
                 $("gif-div").prepend(divGif);
 
             }
-        })
+        });
     }
-    showButtons();
-    addButton();
-    reset();
+    
+    
+    
     //Event Listeners//
     $(document).on("click", ".action", showGifs);
     $(document).on("click", ".image", function(){
